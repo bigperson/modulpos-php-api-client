@@ -70,7 +70,7 @@ $checkData = [
 $login = 'test@test.ru'; // Логин полученный на первом шаге
 $password = 'password'; // Пароль полученный на первом шаге
 $testMode = true; // Тестовый режим
-$client = new \Bigperson\ModulposApiClient\Client($login, $password, true);
+$client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
 $result = $client->sendCheck($checkData);
 ```
 
@@ -83,7 +83,7 @@ $login = 'test@test.ru'; // Логин полученный на первом ш
 $password = 'password'; // Пароль полученный на первом шаге
 $testMode = true; // Тестовый режим
 $documentId = 'efbafcdd-113a-45db-8fb9-718b1fdc3524'; // id документа
-$client = new \Bigperson\ModulposApiClient\Client($login, $password, true);
+$client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
 $result = $client->getStatusDocumentById($documentId);
 ```
 В ответ придет массив со статусом `status`, который может принимать значения:
@@ -102,7 +102,7 @@ $result = $client->getStatusDocumentById($documentId);
 
 Кроме того вы можете вызвать отдельно метод проверки статуса фискального накопителя (сервиса фискализации):
 ```php
-$client = new \Bigperson\ModulposApiClient\Client($login, $password, true);
+$client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
 $result = $client->getStatusFiscalService();
 ```
 
