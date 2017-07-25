@@ -6,7 +6,9 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="false"
+         bootstrap="./vendor/autoload.php"
+>
     <testsuites>
         <testsuite name="Unit Tests">
             <directory suffix="Test.php">./tests</directory>

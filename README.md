@@ -1,5 +1,5 @@
 # PHP клиент для API автоматической фискализации чеков интернет-магазинов Модуль.Кассы
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bigperson/modulpos-php-api-client/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bigperson/modulpos-php-api-client/master/LICENSE) [![Build Status](https://travis-ci.org/bigperson/modulpos-php-api-client.svg?branch=master)](https://travis-ci.org/bigperson/modulpos-php-api-client)
 
 Пакет предоставляет удобный интерфейс для общения с API Модуль.Кассы для отправки данных чеков в сервис фискализации. Пакет может быть и упрощает разработку модулей интеграции интернет-магазина с севисом фискализации Модуль.Кассы.
 
@@ -7,7 +7,7 @@
 
 
 ## Требования
-* php 5.4 и выше
+* php 5.4, 5.6
 
 ## Установка
 Вы можете установить данный пакет с помощью сomposer:
