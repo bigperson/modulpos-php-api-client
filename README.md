@@ -34,44 +34,58 @@ $result = $associate->init();
 В `$result` получим массив с данным `userName` и `password` которые будут использоватся для дальнейших обращений к API. Их нужно где-нибудь сохранить, например в базе данных.
 
 ### Отправка данных чека на сервер фискализации (создание документа)
-Для начала необходимо сформировать данные самого чека:
+Для начала необходимо сформировать данные самого чека. Для этого достаточно для ваших моделей инплементировать интерфейсы ModulposOrderInterface для заказа, ModulposOrderItemInterface для товара в заказе, ModulposPaymentItemInterface для способа оплаты. Также вы можете использовать entity из пакета, или отнаследовать от них собственные классы переопределив методы на собственные.
 ```php
-$checkData = [
-            'id'               => 'efbafcdd-113a-45db-8fb9-718b1fdc3524', // id документа
-            'checkoutDateTime' => '"2016-12-23T06:06:58+00:00', // Дата документа
-            'docNum'           => '12345', // Номер заказа в магазине
-            'docType'          => 'SALE', // Тип документа: SALE - продажа, RETURN - возврат
-            'printReceipt'     => false, // Печатать ли бумажный чек на кассе
-            'email'            => 'test@example.com', // Электронная почта покупателя
-            'inventPositions'  => // Массив номенклатуры товаров в чеке
-                [
-                    0 => [
-                            'barcode'  => '', // Штрихкод товара
-                            'discSum'  => 0, // Сумма скидки, примененной на позицию
-                            'name'     => 'Подажа по свободной цене', // Название товара
-                            'price'    => 100, // Цена товара
-                            'quantity' => 1, // Количество товара
-                            'vatTag'   => 1107, // Тег НДС согласно ФЗ-54
-                        ],
-                ],
-            'moneyPositions'   =>
-                [
-                    0 => [
-                            'paymentType' => 'CARD', // Тип оплаты: CARD - безналичная оплата, CASH - оплата наличными
-                            'sum'         => 100, // Сумма выбранного типа оплаты
-                        ],
-                ],
-            'responseURL'      => 'https://internet.shop.ru/order/982340931/checkout?completed=1', // URL куда будет сообщен результат фискализации по конкретному документу
-        ];
+use Bigperson\ModulposApiClient\Entity\Order;
+use Bigperson\ModulposApiClient\Entity\OrderItem;
+use Bigperson\ModulposApiClient\Entity\PaymentItem;
+
+$dateTime =  new \DateTime('NOW');
+// Создаем заказ
+$order = Order::create([
+    'documentUuid'     => uniqid(),
+    'checkoutDateTime' => $dateTime->format(DATE_RFC3339),
+    'orderId'          => rand(100000, 999999),
+    'typeOperation'    => 'SALE',
+    'customerContact'  => 'test@example.com',
+]);
+
+// Созадем товары
+$orderItem1 = OrderItem::create([
+    'price' => 100,
+    'quantity' => 1,
+    'vatTag' => OrderItem::VAT_NO,
+    'name' => 'Test Product1'
+]);
+
+$orderItem2 = OrderItem::create([
+    'price' => 200,
+    'quantity' => 1,
+    'vatTag' => OrderItem::VAT_NO,
+    'name' => 'Test Product2'
+]);
+
+//Создаем способ оплаты
+$paymentItem = PaymentItem::create([
+    'type' => 'CARD',
+    'sum' => 300
+]);
+
+// Добавляем товары и способ оплаты к заказу
+$order->addItem($orderItem1);
+$order->addItem($orderItem2);
+$order->addPaymentItem($paymentItem);
 ```
 
-Далее этот чек необходимо передать клиенту:
+Далее объект заказа необходимо передать клиенту, также вы можете передать `responseURL` и печатать ли чек на кассе :
 ```php
 $login = 'test@test.ru'; // Логин полученный на первом шаге
 $password = 'password'; // Пароль полученный на первом шаге
 $testMode = true; // Тестовый режим
 $client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
-$result = $client->sendCheck($checkData);
+$responseUrl =  'https://internet.shop.ru/order/982340931/checkout?completed=1';
+$printReceipt = true; // Печатать ли чек на кассе
+$result = $client->sendCheck($order, $responseUrl, $printReceipt);
 ```
 
 В ответ придет массив со статусом обработки документа и фискального накопителя.

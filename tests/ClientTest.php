@@ -13,6 +13,9 @@ namespace Tests;
 
 use Bigperson\ModulposApiClient\Associate;
 use Bigperson\ModulposApiClient\Client;
+use Bigperson\ModulposApiClient\Entity\Order;
+use Bigperson\ModulposApiClient\Entity\OrderItem;
+use Bigperson\ModulposApiClient\Entity\PaymentItem;
 
 
 /**
@@ -98,35 +101,42 @@ class ClientTest extends TestCase
 
         self::$documentId = uniqid();
 
-        $checkData = [
-            'id'               => self::$documentId,
+        $order = Order::create([
+            'documentUuid'       => self::$documentId,
             'checkoutDateTime' => $dateTime->format(DATE_RFC3339),
-            'docNum'           => rand(100000, 999999),
-            'docType'          => 'SALE',
-            'printReceipt'     => false,
-            'email'            => 'test@example.com',
-            'inventPositions'  =>
-                [
-                    0 => [
-                            'barcode'  => rand(100000, 999999),
-                            'discSum'  => 0,
-                            'name'     => 'Подажа по свободной цене',
-                            'price'    => rand(25, 5000),
-                            'quantity' => 1,
-                            'vatTag'   => 1107,
-                        ],
-                ],
-            'moneyPositions'   =>
-                [
-                    0 => [
-                            'paymentType' => 'CARD',
-                            'sum'         => 23,
-                        ],
-                ],
-            'responseURL'      => 'https://internet.shop.ru/order/982340931/checkout?completed=1',
-        ];
+            'orderId'          => rand(100000, 999999),
+            'typeOperation'    => 'SALE',
+            'customerContact'  => 'test@example.com',
+        ]);
 
-        $result = $client->sendCheck($checkData);
+        $orderItem1 = OrderItem::create([
+           'price' => 100,
+            'quantity' => 1,
+            'vatTag' => OrderItem::VAT_NO,
+            'name' => 'Test Product1'
+        ]);
+
+        $orderItem2 = OrderItem::create([
+            'price' => 200,
+            'quantity' => 1,
+            'vatTag' => OrderItem::VAT_NO,
+            'name' => 'Test Product2'
+        ]);
+
+        $paymentItem = PaymentItem::create([
+            'type' => 'CARD',
+            'sum' => 300
+        ]);
+
+        $order->addItem($orderItem1);
+        $order->addItem($orderItem2);
+        $order->addPaymentItem($paymentItem);
+
+        $responseUrl =  'https://internet.shop.ru/order/982340931/checkout?completed=1';
+
+        $printReceipt = true;
+
+        $result = $client->sendCheck($order, $responseUrl, $printReceipt);
 
         $this->assertTrue(is_array($result));
 

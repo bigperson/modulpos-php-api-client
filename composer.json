@@ -1,10 +1,9 @@
 {
     "name": "bigperson/modulpos-php-api-client",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "PHP client for modulpos API Fiscal Service",
     "type": "library",
     "require": {
-        "php": "^5.4",
         "guzzle/http": "^3.9"
     },
     "require-dev": {

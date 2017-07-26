@@ -28,13 +28,14 @@ interface ClientInterface
     /**
      * Отправка данных чека на сервер фискализации (создание документа)
      *
-     * @see http://modulkassa.ru/upload/medialibrary/abb/api-avtomaticheskoy-fiskalizatsii-chekov-internet_magazinov-_ver.1.2_.pdf
+     * @see      http://modulkassa.ru/upload/medialibrary/abb/api-avtomaticheskoy-fiskalizatsii-chekov-internet_magazinov-_ver.1.2_.pdf
      *
-     * @param array $checkData
+     * @param ModulposOrderInterface $order
      *
      * @return array
+     *
      */
-    public function sendCheck(array $checkData);
+    public function sendCheck(ModulposOrderInterface $order);
 
     /**
      * Проверка статуса документа

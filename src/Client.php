@@ -12,6 +12,8 @@
 namespace Bigperson\ModulposApiClient;
 
 use Bigperson\ModulposApiClient\Contracts\ClientInterface;
+use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
+use Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface;
 use Bigperson\ModulposApiClient\Requests\Request;
 
 
@@ -77,13 +79,17 @@ class Client implements ClientInterface
      *
      * @see http://modulkassa.ru/upload/medialibrary/abb/api-avtomaticheskoy-fiskalizatsii-chekov-internet_magazinov-_ver.1.2_.pdf
      *
-     * @param array $checkData
+     * @param ModulposOrderInterface $order
+     * @param null                       $responseUrl
+     * @param bool                       $printReceipt
      *
-     * @return array
+     * @return array|bool|float|int|string
      */
-    public function sendCheck(array $checkData)
+    public function sendCheck(ModulposOrderInterface $order, $responseUrl = null, $printReceipt = false)
     {
         $url = Config::getBaseUrl($this->testMode).self::SEND_CHECK_DATA_URI;
+
+        $checkData = CheckDataFactory::convertToArray($order,  $responseUrl, $printReceipt);
 
         return $this->send('POST', $url, $checkData);
     }
