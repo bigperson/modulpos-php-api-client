@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests\Order;
 
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
@@ -16,11 +15,8 @@ use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
 use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Tests\TestCase;
 
-
 /**
- * Class OrderItemTest
- *
- * @package Tests\Order
+ * Class OrderItemTest.
  */
 class PaymentItemTest extends TestCase
 {
@@ -57,7 +53,7 @@ class PaymentItemTest extends TestCase
     public function testPaymentItemCanBeCreatedByArray()
     {
         $item = PaymentItem::create([
-            'type'    => $this->type,
+            'type'        => $this->type,
             'sum'         => $this->sum,
         ]);
 
@@ -72,8 +68,8 @@ class PaymentItemTest extends TestCase
     {
         try {
             $item = PaymentItem::create([
-                'type'    => $this->type,
-                'sum'         => $this->sum,
+                'type'             => $this->type,
+                'sum'              => $this->sum,
                 'methodNotAllowed' => 'methodNotAllowed',
             ]);
         } catch (\Exception $exception) {

@@ -8,22 +8,18 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Requests;
-
 
 use Bigperson\ModulposApiClient\Contracts\RequestInterface;
 use Guzzle\Http\Client;
 
 /**
- * Class Request
- *
- * @package Bigperson\ModulposApiClient\Requests
+ * Class Request.
  */
 class Request implements RequestInterface
 {
     /**
-     * Отправка запроса
+     * Отправка запроса.
      *
      * @param string $method
      * @param string $url

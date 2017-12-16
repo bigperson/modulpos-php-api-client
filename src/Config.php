@@ -8,28 +8,25 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient;
 
 /**
- * Class Config
- *
- * @package Bigperson\ModulposApiClient
+ * Class Config.
  */
 class Config
 {
     /**
-     * Базовый URL сервиса
+     * Базовый URL сервиса.
      */
     const BASE_URI = 'https://service.modulpos.ru/api/fn';
 
     /**
-     * Базовый URL сервиса для тестирования
+     * Базовый URL сервиса для тестирования.
      */
     const BASE_TEST_URI = 'https://demo-fn.avanpos.com/fn';
 
     /**
-     * Возвращает базовый URL
+     * Возвращает базовый URL.
      *
      * @param bool $testMode
      *

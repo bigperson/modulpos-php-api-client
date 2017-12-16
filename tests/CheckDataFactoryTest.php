@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests;
 
 use Bigperson\ModulposApiClient\CheckDataFactory;
@@ -16,21 +15,18 @@ use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
 
-
 /**
- * Class CheckDataFactoryTest
- *
- * @package Tests
+ * Class CheckDataFactoryTest.
  */
 class CheckDataFactoryTest extends TestCase
 {
-     /**
+    /**
      * @return void
      */
     public function testConvertOrderToArray()
     {
         date_default_timezone_set('Europe/Moscow');
-        $dateTime =  new \DateTime('NOW');
+        $dateTime = new \DateTime('NOW');
 
         $order = Order::create([
             'documentUuid'     => uniqid(),
@@ -41,22 +37,22 @@ class CheckDataFactoryTest extends TestCase
         ]);
 
         $orderItem1 = OrderItem::create([
-           'price' => 100,
+           'price'     => 100,
             'quantity' => 1,
-            'vatTag' => OrderItem::VAT_NO,
-            'name' => 'Test Product1'
+            'vatTag'   => OrderItem::VAT_NO,
+            'name'     => 'Test Product1',
         ]);
 
         $orderItem2 = OrderItem::create([
-            'price' => 200,
+            'price'    => 200,
             'quantity' => 1,
-            'vatTag' => OrderItem::VAT_NO,
-            'name' => 'Test Product2'
+            'vatTag'   => OrderItem::VAT_NO,
+            'name'     => 'Test Product2',
         ]);
 
         $paymentItem = PaymentItem::create([
             'type' => 'CARD',
-            'sum' => 300
+            'sum'  => 300,
         ]);
 
         $order->addItem($orderItem1);
@@ -74,12 +70,10 @@ class CheckDataFactoryTest extends TestCase
     {
         $order = new Order();
 
-        try{
+        try {
             $checkData = CheckDataFactory::convertToArray($order);
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $this->assertTrue($exception instanceof \Exception);
         }
     }
-
-
 }

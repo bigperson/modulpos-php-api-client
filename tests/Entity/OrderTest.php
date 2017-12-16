@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests\Order;
-
 
 use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
@@ -20,13 +18,10 @@ use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Tests\TestCase;
 
 /**
- * Class ConfigTest
- *
- * @package Bigperson\ModulposApiClient\Tests
+ * Class ConfigTest.
  */
 class OrderTest extends TestCase
 {
-
     private $uuid;
     private $orderId;
     private $customerContact;
@@ -76,11 +71,11 @@ class OrderTest extends TestCase
     public function testOrderCanBeCreatedByArray()
     {
         $order = Order::create([
-            'documentUuid'    => $this->uuid,
-            'orderId'         => $this->orderId,
-            'customerContact' => $this->customerContact,
-            'typeOperation'   => $this->typeOperation,
-            'checkoutDateTime' => $this->checkoutDateTime->format(DATE_RFC3339)
+            'documentUuid'     => $this->uuid,
+            'orderId'          => $this->orderId,
+            'customerContact'  => $this->customerContact,
+            'typeOperation'    => $this->typeOperation,
+            'checkoutDateTime' => $this->checkoutDateTime->format(DATE_RFC3339),
         ]);
 
         $this->assertEquals($order->getDocumentUuid(), $this->uuid);
@@ -147,7 +142,6 @@ class OrderTest extends TestCase
 
         $order->addPaymentItem($paymentItem1);
         $order->addPaymentItem($paymentItem2);
-
 
         $this->assertEquals($order->getPaymentItems(), [$paymentItem1, $paymentItem2]);
     }

@@ -11,11 +11,8 @@
 namespace Bigperson\ModulposApiClient\Exceptions;
 
 /**
- * Class RequiredParameterNotFound
- *
- * @package Bigperson\ModulposApiClient\Exceptions
+ * Class RequiredParameterNotFound.
  */
 class RequiredParameterNotFound extends \Exception
 {
-
 }
