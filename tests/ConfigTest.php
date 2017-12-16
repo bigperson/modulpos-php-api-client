@@ -8,20 +8,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests;
-
 
 use Bigperson\ModulposApiClient\Config;
 
 /**
- * Class ConfigTest
- *
- * @package Bigperson\ModulposApiClient\Tests
+ * Class ConfigTest.
  */
 class ConfigTest extends TestCase
 {
-
     /**
      * @return void
      */

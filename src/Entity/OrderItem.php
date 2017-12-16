@@ -8,17 +8,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface;
 use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
 
-
 /**
- * Class OrderItem
- *
- * @package Bigperson\ModulposApiClient\Entity
+ * Class OrderItem.
  */
 class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
 {
@@ -101,7 +97,7 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
      */
     public function setVatTag($vatTag)
     {
-        if(!in_array($vatTag, $this->allowedVatTags)) {
+        if (!in_array($vatTag, $this->allowedVatTags)) {
             throw new VatTagNotAllowed("$vatTag is not allowed");
         }
 

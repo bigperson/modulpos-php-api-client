@@ -8,13 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Contracts;
 
 /**
- * Interface ModulposOrderItemInterface
- *
- * @package Bigperson\ModulposApiClient\Contracts
+ * Interface ModulposOrderItemInterface.
  */
 interface ModulposOrderItemInterface
 {
@@ -54,5 +51,4 @@ interface ModulposOrderItemInterface
      * @return string
      */
     public function getName();
-
 }

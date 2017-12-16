@@ -11,11 +11,8 @@
 namespace Bigperson\ModulposApiClient\Exceptions;
 
 /**
- * Class ItemsNotFound
- *
- * @package Bigperson\ModulposApiClient\Exceptions
+ * Class ItemsNotFound.
  */
 class ItemsNotFound extends \Exception
 {
-
 }

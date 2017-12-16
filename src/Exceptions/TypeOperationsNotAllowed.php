@@ -11,11 +11,8 @@
 namespace Bigperson\ModulposApiClient\Exceptions;
 
 /**
- * Class TypeOperationsNotAllowed
- *
- * @package Bigperson\ModulposApiClient\Exceptions
+ * Class TypeOperationsNotAllowed.
  */
 class TypeOperationsNotAllowed extends \Exception
 {
-
 }

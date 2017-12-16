@@ -8,20 +8,17 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Contracts;
 
 /**
- * Interface RequestInterface
- *
- * @package Bigperson\ModulposApiClient\Contracts
+ * Interface RequestInterface.
  */
 interface RequestInterface
 {
     /**
-     * @param string  $method
+     * @param string $method
      * @param string $url
-     * @param array   $params
+     * @param array  $params
      *
      * @return mixed
      */

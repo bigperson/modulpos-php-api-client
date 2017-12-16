@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests\Order;
 
 use Bigperson\ModulposApiClient\Entity\OrderItem;
@@ -16,11 +15,8 @@ use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
 use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
 use Tests\TestCase;
 
-
 /**
- * Class OrderItemTest
- *
- * @package Tests\Order
+ * Class OrderItemTest.
  */
 class OrderItemTest extends TestCase
 {
@@ -65,10 +61,10 @@ class OrderItemTest extends TestCase
     public function testOrderItemCanBeCreatedByArray()
     {
         $order = OrderItem::create([
-            'price'    => $this->price,
+            'price'        => $this->price,
             'name'         => $this->name,
-            'quantity' => $this->quantity,
-            'vatTag'   => $this->vatTag,
+            'quantity'     => $this->quantity,
+            'vatTag'       => $this->vatTag,
         ]);
 
         $this->assertEquals($order->getName(), $this->name);
@@ -84,10 +80,10 @@ class OrderItemTest extends TestCase
     {
         try {
             $order = OrderItem::create([
-                'price'    => $this->price,
-                'name'         => $this->name,
-                'quantity' => $this->quantity,
-                'vatTag'   => $this->vatTag,
+                'price'            => $this->price,
+                'name'             => $this->name,
+                'quantity'         => $this->quantity,
+                'vatTag'           => $this->vatTag,
                 'methodNotAllowed' => 'methodNotAllowed',
             ]);
         } catch (\Exception $exception) {

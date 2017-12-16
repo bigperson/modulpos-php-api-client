@@ -7,14 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Tests;
 
 use Bigperson\ModulposApiClient\Associate;
 
 /**
- * Class AssociateTest
- *
- * @package Tests
+ * Class AssociateTest.
  */
 class AssociateTest extends TestCase
 {

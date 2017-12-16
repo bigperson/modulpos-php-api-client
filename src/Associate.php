@@ -8,22 +8,18 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient;
-
 
 use Bigperson\ModulposApiClient\Requests\Request;
 
 /**
  * Class Associate
  * Класс
- *
- * @package Bigperson\ModulposApiClient
  */
 class Associate
 {
     /**
-     * URL для запроса на ассоциацию
+     * URL для запроса на ассоциацию.
      */
     const ASSOCIATE_URL = '/v1/associate/';
 
@@ -66,7 +62,7 @@ class Associate
     }
 
     /**
-     * Инициализация (связка) интернет-магазина с розничной точкой
+     * Инициализация (связка) интернет-магазина с розничной точкой.
      *
      * После вызова метода связки, в ответе
      * выдается логин и пароль которые потом нужно использовать для всех обращений а
@@ -82,8 +78,8 @@ class Associate
         $request = new Request();
 
         $authParams = [
-            'login' => $this->login,
-            'password' => $this->password
+            'login'    => $this->login,
+            'password' => $this->password,
         ];
 
         $response = $request->sendHttpRequest('POST', $this->getAssociateUrl(), $authParams);

@@ -11,20 +11,16 @@
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
-use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
 use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 
-
 /**
- * Class Order
- *
- * @package Bigperson\ModulposApiClient\Entity
+ * Class Order.
  */
 class Order extends AbstractEntity implements ModulposOrderInterface
 {
     protected $allowedTypeOperations = [
         'SALE',
-        'RETURN'
+        'RETURN',
     ];
 
     /**
@@ -125,7 +121,7 @@ class Order extends AbstractEntity implements ModulposOrderInterface
      */
     public function setTypeOperation($typeOperation)
     {
-        if(!in_array($typeOperation, $this->allowedTypeOperations)) {
+        if (!in_array($typeOperation, $this->allowedTypeOperations)) {
             throw new TypeOperationsNotAllowed("$typeOperation is not allowed");
         }
 

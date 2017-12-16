@@ -8,21 +8,17 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
 use Bigperson\ModulposApiClient\Exceptions\ItemsNotFound;
 use Bigperson\ModulposApiClient\Exceptions\RequiredParameterNotFound;
 
-
 /**
- * Class CheckDataFactory
+ * Class CheckDataFactory.
  *
  * Фабрика преобразует объект интерфейса ModulposOrderInterface в массив
  * который можно использовать для отправки данных в API модулькассы
- *
- * @package Bigperson\ModulposApiClient
  */
 class CheckDataFactory
 {
@@ -64,7 +60,6 @@ class CheckDataFactory
 
             $checkData['moneyPositions'][] = $paymentItemData;
         }
-
 
         return $checkData;
     }
@@ -134,6 +129,5 @@ class CheckDataFactory
                 throw new RequiredParameterNotFound('sum in paymentItem is required');
             }
         }
-
     }
 }

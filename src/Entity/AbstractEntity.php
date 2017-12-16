@@ -8,24 +8,21 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
 
-
 /**
- * Class AbstractEntity
- *
- * @package Bigperson\ModulposApiClient\Entity
+ * Class AbstractEntity.
  */
 abstract class AbstractEntity
 {
     /**
      * @param array $params
      *
-     * @return static
      * @throws \Bigperson\ModulposApiClient\Exceptions\MethodNotFound
+     *
+     * @return static
      */
     public static function create(array $params)
     {

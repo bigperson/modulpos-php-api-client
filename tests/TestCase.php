@@ -10,15 +10,11 @@
 
 namespace Tests;
 
-
 use PHPUnit\Framework\TestCase as UnitTestCase;
 
 /**
- * Class TestCase
- *
- * @package Tests
+ * Class TestCase.
  */
 class TestCase extends UnitTestCase
 {
-
 }

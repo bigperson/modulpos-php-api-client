@@ -8,17 +8,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposPaymentItemInterface;
 use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 
-
 /**
- * Class PaymentItem
- *
- * @package Bigperson\ModulposApiClient\Entity
+ * Class PaymentItem.
  */
 class PaymentItem extends AbstractEntity implements ModulposPaymentItemInterface
 {
@@ -55,7 +51,7 @@ class PaymentItem extends AbstractEntity implements ModulposPaymentItemInterface
      */
     public function setType($type)
     {
-        if(!in_array($type, $this->allowedTypes)) {
+        if (!in_array($type, $this->allowedTypes)) {
             throw new TypeOperationsNotAllowed("$type is not allowed");
         }
 

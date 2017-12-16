@@ -11,11 +11,8 @@
 namespace Bigperson\ModulposApiClient\Exceptions;
 
 /**
- * Class MethodNotFound
- *
- * @package Bigperson\ModulposApiClient\Exceptions
+ * Class MethodNotFound.
  */
 class MethodNotFound extends \Exception
 {
-
 }

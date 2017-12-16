@@ -8,14 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient\Contracts;
 
-
 /**
- * Interface ModulposOrderInterface
- *
- * @package Bigperson\ModulposApiClient\Contracts
+ * Interface ModulposOrderInterface.
  */
 interface ModulposOrderInterface
 {
@@ -56,22 +52,21 @@ interface ModulposOrderInterface
     /**
      * Товары/услуги в чеке.
      *
-     * @return array  массив объектов ModulposOrderItem
+     * @return array массив объектов ModulposOrderItem
      */
     public function getItems();
 
     /**
      * Способы оплаты в чеке.
      *
-     * @return array  массив объектов ModulposPaymentItem
+     * @return array массив объектов ModulposPaymentItem
      */
     public function getPaymentItems();
 
     /**
-     * Дата и время оплаты в формате DATE_RFC3339
+     * Дата и время оплаты в формате DATE_RFC3339.
      *
      * @return string
      */
     public function getCheckoutDateTime();
-
 }

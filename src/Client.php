@@ -8,19 +8,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Bigperson\ModulposApiClient;
 
 use Bigperson\ModulposApiClient\Contracts\ClientInterface;
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
-use Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface;
 use Bigperson\ModulposApiClient\Requests\Request;
 
-
 /**
- * Class Client
- *
- * @package Bigperson\ModulposApiClient
+ * Class Client.
  */
 class Client implements ClientInterface
 {
@@ -61,9 +56,8 @@ class Client implements ClientInterface
         $this->testMode = $testMode;
     }
 
-
     /**
-     * Опрос готовности сервиса фискализации
+     * Опрос готовности сервиса фискализации.
      *
      * @return array ['status', 'statusDateTime']
      */
@@ -75,13 +69,13 @@ class Client implements ClientInterface
     }
 
     /**
-     * Отправка данных чека на сервер фискализации (создание документа)
+     * Отправка данных чека на сервер фискализации (создание документа).
      *
      * @see http://modulkassa.ru/upload/medialibrary/abb/api-avtomaticheskoy-fiskalizatsii-chekov-internet_magazinov-_ver.1.2_.pdf
      *
      * @param ModulposOrderInterface $order
-     * @param null                       $responseUrl
-     * @param bool                       $printReceipt
+     * @param null                   $responseUrl
+     * @param bool                   $printReceipt
      *
      * @return array|bool|float|int|string
      */
@@ -89,13 +83,13 @@ class Client implements ClientInterface
     {
         $url = Config::getBaseUrl($this->testMode).self::SEND_CHECK_DATA_URI;
 
-        $checkData = CheckDataFactory::convertToArray($order,  $responseUrl, $printReceipt);
+        $checkData = CheckDataFactory::convertToArray($order, $responseUrl, $printReceipt);
 
         return $this->send('POST', $url, $checkData);
     }
 
     /**
-     * Проверка статуса документа
+     * Проверка статуса документа.
      *
      * @param $documentId
      *
@@ -120,8 +114,8 @@ class Client implements ClientInterface
         $request = new Request();
 
         $authParams = [
-            'login' => $this->login,
-            'password' => $this->password
+            'login'    => $this->login,
+            'password' => $this->password,
         ];
 
         $response = $request->sendHttpRequest($method, $url, $authParams, $data);

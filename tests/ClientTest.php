@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Tests;
 
 use Bigperson\ModulposApiClient\Associate;
@@ -17,11 +16,8 @@ use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
 
-
 /**
- * Class ClientTest
- *
- * @package Tests
+ * Class ClientTest.
  */
 class ClientTest extends TestCase
 {
@@ -41,7 +37,7 @@ class ClientTest extends TestCase
     protected static $documentId;
 
     /**
-     * Связывание торговой точки из данных переменных окружения
+     * Связывание торговой точки из данных переменных окружения.
      */
     public static function setUpBeforeClass()
     {
@@ -61,7 +57,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * Проверка статуса сервиса фискализации
+     * Проверка статуса сервиса фискализации.
      *
      * @return void
      */
@@ -76,7 +72,7 @@ class ClientTest extends TestCase
         $statuses = [
             'READY',
             'ASSOCIATED',
-            'FAILED'
+            'FAILED',
         ];
 
         $this->assertTrue(in_array($result['status'], $statuses));
@@ -85,7 +81,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * Проверка отправки данных чека на сервер фискализации
+     * Проверка отправки данных чека на сервер фискализации.
      *
      * @return void
      */
@@ -95,44 +91,43 @@ class ClientTest extends TestCase
 
         $client = new Client(self::$login, self::$password, true);
 
-
         date_default_timezone_set('Europe/Moscow');
-        $dateTime =  new \DateTime('NOW');
+        $dateTime = new \DateTime('NOW');
 
         self::$documentId = uniqid();
 
         $order = Order::create([
             'documentUuid'       => self::$documentId,
-            'checkoutDateTime' => $dateTime->format(DATE_RFC3339),
-            'orderId'          => rand(100000, 999999),
-            'typeOperation'    => 'SALE',
-            'customerContact'  => 'test@example.com',
+            'checkoutDateTime'   => $dateTime->format(DATE_RFC3339),
+            'orderId'            => rand(100000, 999999),
+            'typeOperation'      => 'SALE',
+            'customerContact'    => 'test@example.com',
         ]);
 
         $orderItem1 = OrderItem::create([
-           'price' => 100,
+           'price'     => 100,
             'quantity' => 1,
-            'vatTag' => OrderItem::VAT_NO,
-            'name' => 'Test Product1'
+            'vatTag'   => OrderItem::VAT_NO,
+            'name'     => 'Test Product1',
         ]);
 
         $orderItem2 = OrderItem::create([
-            'price' => 200,
+            'price'    => 200,
             'quantity' => 1,
-            'vatTag' => OrderItem::VAT_NO,
-            'name' => 'Test Product2'
+            'vatTag'   => OrderItem::VAT_NO,
+            'name'     => 'Test Product2',
         ]);
 
         $paymentItem = PaymentItem::create([
             'type' => 'CARD',
-            'sum' => 300
+            'sum'  => 300,
         ]);
 
         $order->addItem($orderItem1);
         $order->addItem($orderItem2);
         $order->addPaymentItem($paymentItem);
 
-        $responseUrl =  'https://internet.shop.ru/order/982340931/checkout?completed=1';
+        $responseUrl = 'https://internet.shop.ru/order/982340931/checkout?completed=1';
 
         $printReceipt = true;
 
@@ -145,14 +140,14 @@ class ClientTest extends TestCase
             'PENDING',
             'PRINTED',
             'COMPLETED',
-            'FAILED'
+            'FAILED',
         ];
 
         $this->assertTrue(in_array($result['status'], $statuses));
     }
 
     /**
-     * Проверка статуса документа (чека)
+     * Проверка статуса документа (чека).
      *
      * @return void
      */
@@ -171,11 +166,9 @@ class ClientTest extends TestCase
             'PENDING',
             'PRINTED',
             'COMPLETED',
-            'FAILED'
+            'FAILED',
         ];
 
         $this->assertTrue(in_array($result['status'], $statuses));
     }
-
-
 }
