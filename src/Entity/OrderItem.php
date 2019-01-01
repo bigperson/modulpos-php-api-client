@@ -12,6 +12,8 @@ namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface;
 use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\PaymentObjectNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\PaymentMethodNotAllowed;
 
 /**
  * Class OrderItem.
@@ -39,6 +41,16 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $paymentObject = 'commodity';
+
+    /**
+     * @var string
+     */
+    protected $paymentMethod = 'full_payment';
+
+    /**
      * @var array
      */
     protected $allowedVatTags = [
@@ -48,6 +60,38 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
         self::VAT_18,
         self::VAT_10_110,
         self::VAT_18_118,
+    ];
+
+    /**
+     * @var array
+     */
+    protected $allowedPaymentObject = [
+		'commodity',
+		'excise',
+		'job',
+		'service',
+		'gambling_bet',
+		'gambling_prize',
+		'lottery',
+		'lottery_prize',
+		'intellectual_activity',
+		'payment',
+		'agent_commission',
+		'composite',
+		'another',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $allowedPaymentMethod = [
+		'full_prepayment',
+		'prepayment',
+		'advance',
+		'full_payment',
+		'partial_payment',
+		'credit',
+		'credit_payment',
     ];
 
     /**
@@ -118,5 +162,45 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentObject()
+    {
+        return $this->paymentObject;
+    }
+
+    /**
+     * @param string $paymentObject
+     */
+    public function setPaymentObject($paymentObject)
+    {
+        if (!in_array($paymentObject, $this->allowedPaymentObject)) {
+            throw new PaymentObjectNotAllowed("$paymentObject is not allowed");
+        }
+
+        $this->paymentObject = $paymentObject;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param string $paymentMethod
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        if (!in_array($paymentMethod, $this->allowedPaymentMethod)) {
+            throw new PaymentMethodNotAllowed("$paymentMethod is not allowed");
+        }
+
+        $this->paymentMethod = $paymentMethod;
     }
 }
