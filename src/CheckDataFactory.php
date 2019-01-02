@@ -61,6 +61,8 @@ class CheckDataFactory
                 'price'    => $item->getPrice(),
                 'quantity' => $item->getQuantity(),
                 'vatTag'   => $item->getVatTag(),
+                'paymentObject'   => $item->getPaymentObject(),
+                'paymentMethod'   => $item->getPaymentMethod(),
             ];
             $checkData['inventPositions'][] = $itemData;
         }

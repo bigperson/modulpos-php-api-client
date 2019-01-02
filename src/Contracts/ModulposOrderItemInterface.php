@@ -53,4 +53,18 @@ interface ModulposOrderItemInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Предмет расчета.
+     *
+     * @return string
+     */
+    public function getPaymentObject();
+
+    /**
+     * Признак расчета.
+     *
+     * @return string
+     */
+    public function getPaymentMethod();
 }
