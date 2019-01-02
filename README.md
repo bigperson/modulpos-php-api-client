@@ -1,5 +1,9 @@
 # PHP клиент для API автоматической фискализации чеков интернет-магазинов Модуль.Кассы
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/bigperson/modulpos-php-api-client/master/LICENSE) [![Build Status](https://travis-ci.org/bigperson/modulpos-php-api-client.svg?branch=master)](https://travis-ci.org/bigperson/modulpos-php-api-client) [![codecov](https://codecov.io/gh/bigperson/modulpos-php-api-client/branch/master/graph/badge.svg)](https://codecov.io/gh/bigperson/modulpos-php-api-client)
+[![](https://img.shields.io/packagist/l/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://github.com/bigperson/modulpos-php-api-client/blob/master/LICENSE) 
+[![](https://img.shields.io/packagist/dt/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://packagist.org/packages/bigperson/modulpos-php-api-client)
+[![](https://img.shields.io/packagist/v/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://packagist.org/packages/bigperson/modulpos-php-api-client)
+[![](https://img.shields.io/travis/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://travis-ci.org/bigperson/modulpos-php-api-client)
+[![](https://img.shields.io/codecov/c/github/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://codecov.io/gh/bigperson/modulpos-php-api-client)
 [![StyleCI](https://styleci.io/repos/98306851/shield?branch=master)](https://styleci.io/repos/98306851)
 
 Пакет предоставляет удобный интерфейс для общения с API Модуль.Кассы для отправки данных чеков в сервис фискализации. Пакет может быть и упрощает разработку модулей интеграции интернет-магазина с севисом фискализации Модуль.Кассы.
@@ -39,6 +43,7 @@ $result = $associate->init();
 Для начала необходимо сформировать данные самого чека. Для этого достаточно для ваших моделей инплементировать интерфейсы ModulposOrderInterface для заказа, ModulposOrderItemInterface для товара в заказе, ModulposPaymentItemInterface для способа оплаты. Также вы можете использовать entity из пакета, или отнаследовать от них собственные классы переопределив методы на собственные.
 ```php
 use Bigperson\ModulposApiClient\Entity\Order;
+use Bigperson\ModulposApiClient\Entity\Cashier;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
 
@@ -77,6 +82,13 @@ $paymentItem = PaymentItem::create([
 $order->addItem($orderItem1);
 $order->addItem($orderItem2);
 $order->addPaymentItem($paymentItem);
+
+//Создаем кассира
+$cashier = Cashier::create([
+    'name' => 'Test Cashier',
+    'inn' => '123456789012',
+    'position' => 'salesman',
+]);
 ```
 
 Далее объект заказа необходимо передать клиенту, также вы можете передать `responseURL` и печатать ли чек на кассе :

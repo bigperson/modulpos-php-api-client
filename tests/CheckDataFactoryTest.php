@@ -11,6 +11,7 @@
 namespace Tests;
 
 use Bigperson\ModulposApiClient\CheckDataFactory;
+use Bigperson\ModulposApiClient\Entity\Cashier;
 use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
@@ -36,6 +37,12 @@ class CheckDataFactoryTest extends TestCase
             'customerContact'  => 'test@example.com',
         ]);
 
+        $cashier = Cashier::create([
+            'name' => 'Test Cashier',
+            'inn' => '123456789012',
+            'position' => 'salesman',
+        ]);
+
         $orderItem1 = OrderItem::create([
            'price'     => 100,
             'quantity' => 1,
@@ -59,7 +66,7 @@ class CheckDataFactoryTest extends TestCase
         $order->addItem($orderItem2);
         $order->addPaymentItem($paymentItem);
 
-        $checkData = CheckDataFactory::convertToArray($order);
+        $checkData = CheckDataFactory::convertToArray($order, null, false, $cashier);
 
         $this->assertTrue(is_array($checkData));
 

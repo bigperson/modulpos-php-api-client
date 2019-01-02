@@ -18,7 +18,7 @@ use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Tests\TestCase;
 
 /**
- * Class ConfigTest.
+ * Class OrderTest.
  */
 class OrderTest extends TestCase
 {

@@ -10,6 +10,7 @@
 
 namespace Bigperson\ModulposApiClient;
 
+use Bigperson\ModulposApiClient\Contracts\ModulposCashierInterface;
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
 use Bigperson\ModulposApiClient\Exceptions\ItemsNotFound;
 use Bigperson\ModulposApiClient\Exceptions\RequiredParameterNotFound;
@@ -23,12 +24,18 @@ use Bigperson\ModulposApiClient\Exceptions\RequiredParameterNotFound;
 class CheckDataFactory
 {
     /**
-     * @param \Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface $order
-     *
+     * @param ModulposOrderInterface $order
+     * @param null $responseUrl URL для подтверждения успешной фискализации на стороне Интернет-магазина
+     * @param bool $printReceipt Печатать ли бумажный чек на кассе при фискализации
+     * @param ModulposCashierInterface $cashier Информация о кассире
      * @return array
      */
-    public static function convertToArray(ModulposOrderInterface $order, $responseUrl = null, $printReceipt = false)
-    {
+    public static function convertToArray(
+        ModulposOrderInterface $order,
+        $responseUrl = null,
+        $printReceipt = false,
+        $cashier = null
+    ) {
         self::validate($order);
 
         $checkData = [
@@ -37,8 +44,15 @@ class CheckDataFactory
             'docNum'           => $order->getOrderId(),
             'docType'          => $order->getTypeOperation(),
             'printReceipt'     => $printReceipt,
+            'responseURL'      => $responseUrl,
             'email'            => $order->getCustomerContact(),
         ];
+
+        if ($cashier) {
+            $checkData['cashierName'] = $cashier->getName();
+            $checkData['cashierInn'] = $cashier->getInn();
+            $checkData['cashierPosition'] = $cashier->getPosition();
+        }
 
         foreach ($order->getItems() as $item) {
             /** @var \Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface $item */

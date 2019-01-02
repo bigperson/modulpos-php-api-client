@@ -46,8 +46,10 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
         self::VAT_0,
         self::VAT_10,
         self::VAT_18,
+        self::VAT_20,
         self::VAT_10_110,
         self::VAT_18_118,
+        self::VAT_20_120,
     ];
 
     /**
