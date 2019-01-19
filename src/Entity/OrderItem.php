@@ -11,9 +11,9 @@
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface;
-use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
-use Bigperson\ModulposApiClient\Exceptions\PaymentObjectNotAllowed;
 use Bigperson\ModulposApiClient\Exceptions\PaymentMethodNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\PaymentObjectNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
 
 /**
  * Class OrderItem.
@@ -68,32 +68,32 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
      * @var array
      */
     protected $allowedPaymentObject = [
-		'commodity',
-		'excise',
-		'job',
-		'service',
-		'gambling_bet',
-		'gambling_prize',
-		'lottery',
-		'lottery_prize',
-		'intellectual_activity',
-		'payment',
-		'agent_commission',
-		'composite',
-		'another',
+        'commodity',
+        'excise',
+        'job',
+        'service',
+        'gambling_bet',
+        'gambling_prize',
+        'lottery',
+        'lottery_prize',
+        'intellectual_activity',
+        'payment',
+        'agent_commission',
+        'composite',
+        'another',
     ];
 
     /**
      * @var array
      */
     protected $allowedPaymentMethod = [
-		'full_prepayment',
-		'prepayment',
-		'advance',
-		'full_payment',
-		'partial_payment',
-		'credit',
-		'credit_payment',
+        'full_prepayment',
+        'prepayment',
+        'advance',
+        'full_payment',
+        'partial_payment',
+        'credit',
+        'credit_payment',
     ];
 
     /**

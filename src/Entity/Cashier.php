@@ -33,7 +33,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
     protected $position;
 
     /**
-     * Имя кассира
+     * Имя кассира.
      *
      * @return string|null
      */
@@ -43,7 +43,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
     }
 
     /**
-     * ИНН кассира (используется валидатор ИНН)
+     * ИНН кассира (используется валидатор ИНН).
      *
      * @return string|null
      */
@@ -53,7 +53,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
     }
 
     /**
-     * Должность кассира (до 100 символов)
+     * Должность кассира (до 100 символов).
      *
      * @return string|null
      */
@@ -64,6 +64,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
 
     /**
      * @param null|string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -75,6 +76,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
 
     /**
      * @param null|string $inn
+     *
      * @return $this
      */
     public function setInn($inn)
@@ -86,6 +88,7 @@ class Cashier extends AbstractEntity implements ModulposCashierInterface
 
     /**
      * @param $position
+     *
      * @return $this
      */
     public function setPosition($position)

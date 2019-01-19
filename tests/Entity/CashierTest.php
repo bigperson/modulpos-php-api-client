@@ -44,9 +44,9 @@ class CashierTest extends TestCase
     public function testOrderCanBeCreatedByArray()
     {
         $cashier = Cashier::create([
-            'name'     => $this->cashierName,
+            'name'         => $this->cashierName,
             'inn'          => $this->inn,
-            'position'  => $this->position
+            'position'     => $this->position,
         ]);
 
         $this->assertEquals($cashier->getName(), $this->cashierName);
@@ -61,9 +61,9 @@ class CashierTest extends TestCase
     {
         try {
             Cashier::create([
-                'name' => $this->cashierName,
-                'inn' => $this->inn,
-                'position' => $this->position,
+                'name'             => $this->cashierName,
+                'inn'              => $this->inn,
+                'position'         => $this->position,
                 'methodNotAllowed' => 'methodNotAllowed',
             ]);
         } catch (\Exception $exception) {
