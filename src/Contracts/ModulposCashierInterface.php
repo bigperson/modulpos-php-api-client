@@ -11,26 +11,26 @@
 namespace Bigperson\ModulposApiClient\Contracts;
 
 /**
- * Interface ModulposOrderItemInterface
+ * Interface ModulposOrderItemInterface.
  */
 interface ModulposCashierInterface
 {
     /**
-     * Имя кассира
+     * Имя кассира.
      *
      * @return string|null
      */
     public function getName();
 
     /**
-     * ИНН кассира (используется валидатор ИНН)
+     * ИНН кассира (используется валидатор ИНН).
      *
      * @return float
      */
     public function getInn();
 
     /**
-     * Должность кассира (до 100 символов)
+     * Должность кассира (до 100 символов).
      *
      * @return int
      */

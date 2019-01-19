@@ -24,10 +24,11 @@ use Bigperson\ModulposApiClient\Exceptions\RequiredParameterNotFound;
 class CheckDataFactory
 {
     /**
-     * @param ModulposOrderInterface $order
-     * @param null $responseUrl URL для подтверждения успешной фискализации на стороне Интернет-магазина
-     * @param bool $printReceipt Печатать ли бумажный чек на кассе при фискализации
-     * @param ModulposCashierInterface $cashier Информация о кассире
+     * @param ModulposOrderInterface   $order
+     * @param null                     $responseUrl  URL для подтверждения успешной фискализации на стороне Интернет-магазина
+     * @param bool                     $printReceipt Печатать ли бумажный чек на кассе при фискализации
+     * @param ModulposCashierInterface $cashier      Информация о кассире
+     *
      * @return array
      */
     public static function convertToArray(
@@ -57,10 +58,10 @@ class CheckDataFactory
         foreach ($order->getItems() as $item) {
             /** @var \Bigperson\ModulposApiClient\Contracts\ModulposOrderItemInterface $item */
             $itemData = [
-                'name'     => $item->getName(),
-                'price'    => $item->getPrice(),
-                'quantity' => $item->getQuantity(),
-                'vatTag'   => $item->getVatTag(),
+                'name'            => $item->getName(),
+                'price'           => $item->getPrice(),
+                'quantity'        => $item->getQuantity(),
+                'vatTag'          => $item->getVatTag(),
                 'paymentObject'   => $item->getPaymentObject(),
                 'paymentMethod'   => $item->getPaymentMethod(),
             ];

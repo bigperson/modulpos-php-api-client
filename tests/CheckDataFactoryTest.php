@@ -38,8 +38,8 @@ class CheckDataFactoryTest extends TestCase
         ]);
 
         $cashier = Cashier::create([
-            'name' => 'Test Cashier',
-            'inn' => '123456789012',
+            'name'     => 'Test Cashier',
+            'inn'      => '123456789012',
             'position' => 'salesman',
         ]);
 
