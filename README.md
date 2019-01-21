@@ -6,7 +6,8 @@
 [![](https://img.shields.io/codecov/c/github/bigperson/modulpos-php-api-client.svg?style=flat-square)](https://codecov.io/gh/bigperson/modulpos-php-api-client)
 [![StyleCI](https://styleci.io/repos/98306851/shield?branch=master)](https://styleci.io/repos/98306851)
 
-Пакет предоставляет удобный интерфейс для общения с API Модуль.Кассы для отправки данных чеков в сервис фискализации. Пакет может быть и упрощает разработку модулей интеграции интернет-магазина с севисом фискализации Модуль.Кассы.
+Пакет предоставляет удобный интерфейс для общения с API Модуль.Кассы для отправки данных чеков в сервис фискализации. 
+Пакет упрощает разработку модулей интеграции интернет-магазина с севисом фискализации Модуль.Кассы.
 
 Часть описания дублирует оригинал [документации по API Модуль.Кассы](http://modulkassa.ru/upload/medialibrary/abb/api-avtomaticheskoy-fiskalizatsii-chekov-internet_magazinov-_ver.1.2_.pdf)
 
