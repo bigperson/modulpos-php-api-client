@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests\Order;
 
@@ -22,22 +23,16 @@ class PaymentItemTest extends TestCase
 {
     private $type;
     private $sum;
-
-    /**
-     * @return void
-     */
-    public function setUp()
+    
+    public function setUp(): void 
     {
         $this->type = 'CARD';
         $this->sum = 100;
 
         parent::setUp();
     }
-
-    /**
-     * @return void
-     */
-    public function testPaymentItemCanBeCreated()
+    
+    public function testPaymentItemCanBeCreated(): void
     {
         $item = new PaymentItem();
         $item->setType($this->type);
@@ -46,11 +41,8 @@ class PaymentItemTest extends TestCase
         $this->assertEquals($item->getType(), $this->type);
         $this->assertEquals($item->getSum(), $this->sum);
     }
-
-    /**
-     * @return void
-     */
-    public function testPaymentItemCanBeCreatedByArray()
+    
+    public function testPaymentItemCanBeCreatedByArray(): void
     {
         $item = PaymentItem::create([
             'type'        => $this->type,
@@ -60,11 +52,8 @@ class PaymentItemTest extends TestCase
         $this->assertEquals($item->getType(), $this->type);
         $this->assertEquals($item->getSum(), $this->sum);
     }
-
-    /**
-     * @return void
-     */
-    public function testPaymentItemCanNotBeCreatedByArray()
+    
+    public function testPaymentItemCanNotBeCreatedByArray(): void
     {
         try {
             $item = PaymentItem::create([
@@ -76,11 +65,8 @@ class PaymentItemTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-
-    /**
-     * @return void
-     */
-    public function testPaymentItemCanNotSetType()
+    
+    public function testPaymentItemCanNotSetType(): void
     {
         try {
             $item = new PaymentItem();

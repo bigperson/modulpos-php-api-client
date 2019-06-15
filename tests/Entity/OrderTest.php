@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests\Order;
 
@@ -30,11 +31,8 @@ class OrderTest extends TestCase
      * @var \DateTime
      */
     private $checkoutDateTime;
-
-    /**
-     * @return void
-     */
-    public function setUp()
+    
+    public function setUp(): void 
     {
         $this->uuid = uniqid();
         $this->orderId = rand(1000, 9999);
@@ -45,11 +43,8 @@ class OrderTest extends TestCase
 
         parent::setUp();
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderCanBeCreated()
+    
+    public function testOrderCanBeCreated(): void
     {
         $order = new Order();
         $order->setDocumentUuid($this->uuid);
@@ -64,11 +59,8 @@ class OrderTest extends TestCase
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderCanBeCreatedByArray()
+    
+    public function testOrderCanBeCreatedByArray(): void
     {
         $order = Order::create([
             'documentUuid'     => $this->uuid,
@@ -84,11 +76,8 @@ class OrderTest extends TestCase
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderCanNotBeCreatedByArray()
+    
+    public function testOrderCanNotBeCreatedByArray(): void
     {
         try {
             $order = Order::create([
@@ -102,11 +91,8 @@ class OrderTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderCanNotSetTypeOperator()
+    
+    public function testOrderCanNotSetTypeOperator(): void
     {
         try {
             $order = new Order();
@@ -115,11 +101,8 @@ class OrderTest extends TestCase
             $this->assertTrue($exception instanceof TypeOperationsNotAllowed);
         }
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderItemsCanAdd()
+    
+    public function testOrderItemsCanAdd(): void
     {
         $order = new Order();
         $orderItem1 = new OrderItem();
@@ -130,11 +113,8 @@ class OrderTest extends TestCase
 
         $this->assertEquals($order->getItems(), [$orderItem1, $orderItem2]);
     }
-
-    /**
-     * @return void
-     */
-    public function testPaymentItemsCanAdd()
+    
+    public function testPaymentItemsCanAdd(): void
     {
         $order = new Order();
         $paymentItem1 = new PaymentItem();

@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests;
 
@@ -15,16 +16,14 @@ use Bigperson\ModulposApiClient\Entity\Cashier;
 use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
+use Bigperson\ModulposApiClient\Exceptions\RequiredParameterNotFound;
 
 /**
  * Class CheckDataFactoryTest.
  */
 class CheckDataFactoryTest extends TestCase
 {
-    /**
-     * @return void
-     */
-    public function testConvertOrderToArray()
+    public function testConvertOrderToArray(): void
     {
         date_default_timezone_set('Europe/Moscow');
         $dateTime = new \DateTime('NOW');
@@ -73,14 +72,14 @@ class CheckDataFactoryTest extends TestCase
         $this->assertNotEmpty($checkData);
     }
 
-    public function testValidate()
+    public function testValidateRequiredParameterNotFound(): void
     {
         $order = new Order();
 
         try {
             $checkData = CheckDataFactory::convertToArray($order);
         } catch (\Exception $exception) {
-            $this->assertTrue($exception instanceof \Exception);
+            $this->assertTrue($exception instanceof RequiredParameterNotFound);
         }
     }
 }

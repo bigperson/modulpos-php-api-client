@@ -2,16 +2,19 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests\Order;
 
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
+use Bigperson\ModulposApiClient\Exceptions\PaymentMethodNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\PaymentObjectNotAllowed;
 use Bigperson\ModulposApiClient\Exceptions\VatTagNotAllowed;
 use Tests\TestCase;
 
@@ -24,24 +27,22 @@ class OrderItemTest extends TestCase
     private $quantity;
     private $vatTag;
     private $name;
-
-    /**
-     * @return void
-     */
-    public function setUp()
+    private $paymentMethod;
+    private $paymentObject;
+    
+    public function setUp(): void
     {
         $this->price = 32.21;
         $this->quantity = rand(1, 10);
         $this->vatTag = OrderItem::VAT_NO;
         $this->name = 'Test product';
+        $this->paymentMethod = 'full_prepayment';
+        $this->paymentObject = 'commodity';
 
         parent::setUp();
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderItemCanBeCreated()
+    
+    public function testOrderItemCanBeCreated(): void
     {
         $order = new OrderItem();
         $order->setPrice($this->price);
@@ -54,17 +55,16 @@ class OrderItemTest extends TestCase
         $this->assertEquals($order->getQuantity(), $this->quantity);
         $this->assertEquals($order->getVatTag(), $this->vatTag);
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderItemCanBeCreatedByArray()
+    
+    public function testOrderItemCanBeCreatedByArray(): void
     {
         $order = OrderItem::create([
             'price'        => $this->price,
             'name'         => $this->name,
             'quantity'     => $this->quantity,
             'vatTag'       => $this->vatTag,
+            'paymentMethod'=> $this->paymentMethod,
+            'paymentObject'=> $this->paymentObject,
         ]);
 
         $this->assertEquals($order->getName(), $this->name);
@@ -72,11 +72,8 @@ class OrderItemTest extends TestCase
         $this->assertEquals($order->getQuantity(), $this->quantity);
         $this->assertEquals($order->getVatTag(), $this->vatTag);
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderItemCanNotBeCreatedByArray()
+    
+    public function testOrderItemCanNotBeCreatedByArray(): void
     {
         try {
             $order = OrderItem::create([
@@ -90,17 +87,34 @@ class OrderItemTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-
-    /**
-     * @return void
-     */
-    public function testOrderItemCanNotSetVatTag()
+    
+    public function testOrderItemCanNotSetVatTag(): void
     {
         try {
             $order = new OrderItem();
             $order->setVatTag('NONE');
         } catch (\Exception $exception) {
             $this->assertTrue($exception instanceof VatTagNotAllowed);
+        }
+    }
+    
+    public function testOrderItemCanNotSetPaymentMethod(): void
+    {
+        try {
+            $order = new OrderItem();
+            $order->setPaymentMethod('NONE');
+        } catch (\Exception $exception) {
+            $this->assertTrue($exception instanceof PaymentMethodNotAllowed);
+        }
+    }
+    
+    public function testOrderItemCanNotSetPaymentObject(): void
+    {
+        try {
+            $order = new OrderItem();
+            $order->setPaymentObject('NONE');
+        } catch (\Exception $exception) {
+            $this->assertTrue($exception instanceof PaymentObjectNotAllowed);
         }
     }
 }

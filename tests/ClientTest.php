@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests;
 
@@ -39,7 +40,7 @@ class ClientTest extends TestCase
     /**
      * Связывание торговой точки из данных переменных окружения.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void 
     {
         $login = getenv('MODULPOS_LOGIN');
         $password = getenv('MODULPOS_PASSWORD');
@@ -50,7 +51,6 @@ class ClientTest extends TestCase
         $result = $associate->init();
 
         self::$login = $result['userName'];
-
         self::$password = $result['password'];
 
         parent::setUpBeforeClass();
@@ -61,7 +61,7 @@ class ClientTest extends TestCase
      *
      * @return void
      */
-    public function testGetStatusFiscalService()
+    public function testGetStatusFiscalService(): void
     {
         $client = new Client(self::$login, self::$password, true);
 
@@ -85,7 +85,7 @@ class ClientTest extends TestCase
      *
      * @return void
      */
-    public function testSendCheck()
+    public function testSendCheck(): void
     {
         $this->assertEmpty(self::$documentId);
 
@@ -151,7 +151,7 @@ class ClientTest extends TestCase
      *
      * @return void
      */
-    public function testGetDocumentStatus()
+    public function testGetDocumentStatus(): void
     {
         $this->assertNotEmpty(self::$documentId);
 

@@ -14,9 +14,14 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
     <php>
-        <env name="MODULPOS_LOGIN" value="testLogin"/>
-        <env name="MODULPOS_PASSWORD" value="testPassword"/>
-        <env name="MODULPOS_RETAIL_POINT_UUID" value="test-retail-point-uuid"/>
+        <env name="MODULPOS_LOGIN" value="test"/>
+        <env name="MODULPOS_PASSWORD" value="test"/>
+        <env name="MODULPOS_RETAIL_POINT_UUID" value="test"/>
     </php>
 </phpunit>

@@ -13,7 +13,9 @@
 
 
 ## Требования
-* php 5.4, 5.6, 7.0, 7.1, 7.2, 7.3
+* php ^7.1
+* guzzlehttp/guzzle (или любой клиент следующий интерфейсу `\GuzzleHttp\ClientInterface`)
+* ext-json
 * curl
 
 ## Установка
@@ -21,6 +23,11 @@
 
 ```
 composer require bigperson/modulpos-php-api-client
+```
+
+Для PHP 5.4-7.0 можеете использовать предыдущую версию
+```
+composer require bigperson/modulpos-php-api-client 1.0
 ```
 
 ## Использование
@@ -92,7 +99,7 @@ $cashier = Cashier::create([
 ]);
 ```
 
-Далее объект заказа необходимо передать клиенту, также вы можете передать `responseURL` и печатать ли чек на кассе :
+Далее объект заказа необходимо передать клиенту, также вы можете передать `responseURL` и печатать ли чек на кассе:
 ```php
 $login = 'test@test.ru'; // Логин полученный на первом шаге
 $password = 'password'; // Пароль полученный на первом шаге
@@ -100,8 +107,10 @@ $testMode = true; // Тестовый режим
 $client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
 $responseUrl =  'https://internet.shop.ru/order/982340931/checkout?completed=1';
 $printReceipt = true; // Печатать ли чек на кассе
-$result = $client->sendCheck($order, $responseUrl, $printReceipt);
+$result = $client->sendCheck($order, $responseUrl, $printReceipt, $cashier);
 ```
+Все параметры кроме $order - опциональные. Если не передан объект `ModulposCashierInterface` 
+то будут использованны данные из настроек торговой точки.
 
 В ответ придет массив со статусом обработки документа и фискального накопителя.
 
@@ -135,6 +144,9 @@ $client = new \Bigperson\ModulposApiClient\Client($login, $password, $testMode);
 $result = $client->getStatusFiscalService();
 ```
 
+## Развитие пакета
+С целью активного развития пакета, рекомендуем создавать пулл-реквесты, а не только баг-репорты ([issues](https://github.com/bigperson/modulpos-php-api-client/issues)). 
+По любым проблемам рекомендуем открывать Баг-репорты с подробным описанием проблемы и последовательностью действия для воспроизведения бага.
 
 ## Лицензия
 [MIT](https://raw.githubusercontent.com/bigperson/modulpos-php-api-client/master/LICENSE)

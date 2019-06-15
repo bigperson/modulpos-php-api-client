@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Bigperson\ModulposApiClient\Entity;
 
@@ -175,7 +176,8 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
     }
 
     /**
-     * @param string $paymentObject
+     * @param $paymentObject
+     * @throws PaymentObjectNotAllowed
      */
     public function setPaymentObject($paymentObject)
     {
@@ -195,7 +197,8 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
     }
 
     /**
-     * @param string $paymentMethod
+     * @param $paymentMethod
+     * @throws PaymentMethodNotAllowed
      */
     public function setPaymentMethod($paymentMethod)
     {

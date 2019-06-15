@@ -2,11 +2,12 @@
 /**
  * This file is part of Pandora-alarm.ru package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Bigperson\ModulposApiClient\Contracts;
 
@@ -52,14 +53,14 @@ interface ModulposOrderInterface
     /**
      * Товары/услуги в чеке.
      *
-     * @return array массив объектов ModulposOrderItem
+     * @return array|ModulposOrderItemInterface[] массив объектов ModulposOrderItem
      */
     public function getItems();
 
     /**
      * Способы оплаты в чеке.
      *
-     * @return array массив объектов ModulposPaymentItem
+     * @return array|ModulposPaymentItemInterface[] массив объектов ModulposPaymentItem
      */
     public function getPaymentItems();
 

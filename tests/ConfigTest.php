@@ -2,11 +2,12 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Tests;
 
@@ -17,20 +18,14 @@ use Bigperson\ModulposApiClient\Config;
  */
 class ConfigTest extends TestCase
 {
-    /**
-     * @return void
-     */
-    public function testGetBaseUrlTestMode()
+    public function testGetBaseUrlTestMode(): void
     {
         $baseUrl = Config::getBaseUrl(true);
 
         $this->assertTrue($baseUrl === Config::BASE_TEST_URI);
     }
 
-    /**
-     * @return void
-     */
-    public function testGetBaseUrlWorkMode()
+    public function testGetBaseUrlWorkMode(): void
     {
         $baseUrl = Config::getBaseUrl();
 

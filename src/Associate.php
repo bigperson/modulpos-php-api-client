@@ -2,15 +2,16 @@
 /**
  * This file is part of Modulpos package.
  *
- * @author Anton Kartsev <anton@alarm.ru>
+ * @author Anton Kartsev <anton@alarmcrm.ru>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Bigperson\ModulposApiClient;
 
-use Bigperson\ModulposApiClient\Requests\Request;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Class Associate
@@ -37,6 +38,12 @@ class Associate
      * @var string
      */
     private $retailPointUuid;
+
+    /**
+     * @var ClientInterface
+     */
+    private $client;
+
     /**
      * @var bool
      */
@@ -51,14 +58,16 @@ class Associate
      * @param string $login
      * @param string $password
      * @param string $retailPointUuid
-     * @param bool   $testMode
+     * @param ClientInterface $client
+     * @param bool $testMode
      */
-    public function __construct($login, $password, $retailPointUuid, $testMode = false)
+    public function __construct(string $login, string $password, string $retailPointUuid, bool $testMode = false, ?ClientInterface $client = null)
     {
         $this->login = $login;
         $this->password = $password;
         $this->retailPointUuid = $retailPointUuid;
         $this->testMode = $testMode;
+        $this->client = $client ?? new \GuzzleHttp\Client();
     }
 
     /**
@@ -75,16 +84,11 @@ class Associate
      */
     public function init()
     {
-        $request = new Request();
+        $authParams = ['auth' => [$this->login, $this->password]];
+        $response = $this->client->request('POST', $this->getAssociateUrl(), $authParams);
+        $result = $response->getBody();
 
-        $authParams = [
-            'login'    => $this->login,
-            'password' => $this->password,
-        ];
-
-        $response = $request->sendHttpRequest('POST', $this->getAssociateUrl(), $authParams);
-
-        return $response;
+        return json_decode($result->getContents(), true);
     }
 
     /**
@@ -92,6 +96,6 @@ class Associate
      */
     private function getAssociateUrl()
     {
-        return Config::getBaseUrl($this->testMode).self::ASSOCIATE_URL.$this->retailPointUuid;
+        return Config::getBaseUrl($this->testMode) . self::ASSOCIATE_URL . $this->retailPointUuid;
     }
 }
