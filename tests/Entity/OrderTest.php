@@ -31,8 +31,8 @@ class OrderTest extends TestCase
      * @var \DateTime
      */
     private $checkoutDateTime;
-    
-    public function setUp(): void 
+
+    public function setUp(): void
     {
         $this->uuid = uniqid();
         $this->orderId = rand(1000, 9999);
@@ -43,7 +43,7 @@ class OrderTest extends TestCase
 
         parent::setUp();
     }
-    
+
     public function testOrderCanBeCreated(): void
     {
         $order = new Order();
@@ -59,7 +59,7 @@ class OrderTest extends TestCase
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
     }
-    
+
     public function testOrderCanBeCreatedByArray(): void
     {
         $order = Order::create([
@@ -76,7 +76,7 @@ class OrderTest extends TestCase
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
     }
-    
+
     public function testOrderCanNotBeCreatedByArray(): void
     {
         try {
@@ -91,7 +91,7 @@ class OrderTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-    
+
     public function testOrderCanNotSetTypeOperator(): void
     {
         try {
@@ -101,7 +101,7 @@ class OrderTest extends TestCase
             $this->assertTrue($exception instanceof TypeOperationsNotAllowed);
         }
     }
-    
+
     public function testOrderItemsCanAdd(): void
     {
         $order = new Order();
@@ -113,7 +113,7 @@ class OrderTest extends TestCase
 
         $this->assertEquals($order->getItems(), [$orderItem1, $orderItem2]);
     }
-    
+
     public function testPaymentItemsCanAdd(): void
     {
         $order = new Order();

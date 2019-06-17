@@ -40,7 +40,7 @@ class ClientTest extends TestCase
     /**
      * Связывание торговой точки из данных переменных окружения.
      */
-    public static function setUpBeforeClass(): void 
+    public static function setUpBeforeClass(): void
     {
         $login = getenv('MODULPOS_LOGIN');
         $password = getenv('MODULPOS_PASSWORD');

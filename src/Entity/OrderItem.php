@@ -177,6 +177,7 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
 
     /**
      * @param $paymentObject
+     *
      * @throws PaymentObjectNotAllowed
      */
     public function setPaymentObject($paymentObject)
@@ -198,6 +199,7 @@ class OrderItem extends AbstractEntity implements ModulposOrderItemInterface
 
     /**
      * @param $paymentMethod
+     *
      * @throws PaymentMethodNotAllowed
      */
     public function setPaymentMethod($paymentMethod)

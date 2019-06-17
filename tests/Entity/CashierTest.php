@@ -23,7 +23,7 @@ class CashierTest extends TestCase
     private $cashierName = 'test name';
     private $inn = '2123213213';
     private $position = 'salesman';
-    
+
     public function testOrderCanBeCreated(): void
     {
         $order = new Cashier();
@@ -35,7 +35,7 @@ class CashierTest extends TestCase
         $this->assertEquals($order->getInn(), $this->inn);
         $this->assertEquals($order->getPosition(), $this->position);
     }
-    
+
     public function testOrderCanBeCreatedByArray(): void
     {
         $cashier = Cashier::create([
@@ -48,7 +48,7 @@ class CashierTest extends TestCase
         $this->assertEquals($cashier->getInn(), $this->inn);
         $this->assertEquals($cashier->getPosition(), $this->position);
     }
-    
+
     public function testOrderCanNotBeCreatedByArray(): void
     {
         try {

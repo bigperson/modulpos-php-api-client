@@ -23,15 +23,15 @@ class PaymentItemTest extends TestCase
 {
     private $type;
     private $sum;
-    
-    public function setUp(): void 
+
+    public function setUp(): void
     {
         $this->type = 'CARD';
         $this->sum = 100;
 
         parent::setUp();
     }
-    
+
     public function testPaymentItemCanBeCreated(): void
     {
         $item = new PaymentItem();
@@ -41,7 +41,7 @@ class PaymentItemTest extends TestCase
         $this->assertEquals($item->getType(), $this->type);
         $this->assertEquals($item->getSum(), $this->sum);
     }
-    
+
     public function testPaymentItemCanBeCreatedByArray(): void
     {
         $item = PaymentItem::create([
@@ -52,7 +52,7 @@ class PaymentItemTest extends TestCase
         $this->assertEquals($item->getType(), $this->type);
         $this->assertEquals($item->getSum(), $this->sum);
     }
-    
+
     public function testPaymentItemCanNotBeCreatedByArray(): void
     {
         try {
@@ -65,7 +65,7 @@ class PaymentItemTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-    
+
     public function testPaymentItemCanNotSetType(): void
     {
         try {

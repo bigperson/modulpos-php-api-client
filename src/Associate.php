@@ -55,11 +55,11 @@ class Associate
      * Данные учетной записи Модуль.Касса используются только один раз - для
      * создания связки аккаунта и розничной точки.
      *
-     * @param string $login
-     * @param string $password
-     * @param string $retailPointUuid
+     * @param string          $login
+     * @param string          $password
+     * @param string          $retailPointUuid
      * @param ClientInterface $client
-     * @param bool $testMode
+     * @param bool            $testMode
      */
     public function __construct(string $login, string $password, string $retailPointUuid, bool $testMode = false, ?ClientInterface $client = null)
     {
@@ -96,6 +96,6 @@ class Associate
      */
     private function getAssociateUrl()
     {
-        return Config::getBaseUrl($this->testMode) . self::ASSOCIATE_URL . $this->retailPointUuid;
+        return Config::getBaseUrl($this->testMode).self::ASSOCIATE_URL.$this->retailPointUuid;
     }
 }

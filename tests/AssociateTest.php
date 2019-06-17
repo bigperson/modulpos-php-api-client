@@ -18,7 +18,7 @@ use Bigperson\ModulposApiClient\Associate;
  */
 class AssociateTest extends TestCase
 {
-    public function testAssociateRetailPointAndOnlineShop(): array 
+    public function testAssociateRetailPointAndOnlineShop(): array
     {
         $login = getenv('MODULPOS_LOGIN');
         $password = getenv('MODULPOS_PASSWORD');
