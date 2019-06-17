@@ -29,7 +29,7 @@ class OrderItemTest extends TestCase
     private $name;
     private $paymentMethod;
     private $paymentObject;
-    
+
     public function setUp(): void
     {
         $this->price = 32.21;
@@ -41,7 +41,7 @@ class OrderItemTest extends TestCase
 
         parent::setUp();
     }
-    
+
     public function testOrderItemCanBeCreated(): void
     {
         $order = new OrderItem();
@@ -55,7 +55,7 @@ class OrderItemTest extends TestCase
         $this->assertEquals($order->getQuantity(), $this->quantity);
         $this->assertEquals($order->getVatTag(), $this->vatTag);
     }
-    
+
     public function testOrderItemCanBeCreatedByArray(): void
     {
         $order = OrderItem::create([
@@ -72,7 +72,7 @@ class OrderItemTest extends TestCase
         $this->assertEquals($order->getQuantity(), $this->quantity);
         $this->assertEquals($order->getVatTag(), $this->vatTag);
     }
-    
+
     public function testOrderItemCanNotBeCreatedByArray(): void
     {
         try {
@@ -87,7 +87,7 @@ class OrderItemTest extends TestCase
             $this->assertTrue($exception instanceof MethodNotFound);
         }
     }
-    
+
     public function testOrderItemCanNotSetVatTag(): void
     {
         try {
@@ -97,7 +97,7 @@ class OrderItemTest extends TestCase
             $this->assertTrue($exception instanceof VatTagNotAllowed);
         }
     }
-    
+
     public function testOrderItemCanNotSetPaymentMethod(): void
     {
         try {
@@ -107,7 +107,7 @@ class OrderItemTest extends TestCase
             $this->assertTrue($exception instanceof PaymentMethodNotAllowed);
         }
     }
-    
+
     public function testOrderItemCanNotSetPaymentObject(): void
     {
         try {
