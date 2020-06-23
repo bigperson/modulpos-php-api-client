@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
+use Bigperson\ModulposApiClient\Exceptions\TaxModeNotAllowed;
 use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 
 /**
@@ -22,6 +23,18 @@ class Order extends AbstractEntity implements ModulposOrderInterface
     protected $allowedTypeOperations = [
         'SALE',
         'RETURN',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $allowedTaxModes = [
+        'COMMON',
+        'SIMPLIFIED',
+        'SIMPLIFIED_WITH_EXPENSE',
+        'ENVD',
+        'PATENT',
+        'COMMON_AGRICULTURAL',
     ];
 
     /**
@@ -58,6 +71,11 @@ class Order extends AbstractEntity implements ModulposOrderInterface
      * @var string
      */
     protected $checkoutDateTime;
+
+    /**
+     * @var string
+     */
+    protected $taxMode;
 
     /**
      * @return string
@@ -175,5 +193,24 @@ class Order extends AbstractEntity implements ModulposOrderInterface
     public function setCheckoutDateTime($checkoutDateTime)
     {
         $this->checkoutDateTime = $checkoutDateTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxMode()
+    {
+        return $this->taxMode;
+    }
+
+    /**
+     * @param string $taxMode
+     */
+    public function setTaxMode($taxMode)
+    {
+        if (!in_array($taxMode, $this->allowedTaxModes)) {
+            throw new TaxModeNotAllowed("$taxMode is not allowed");
+        }
+        $this->taxMode = $taxMode;
     }
 }

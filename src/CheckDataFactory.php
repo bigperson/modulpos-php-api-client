@@ -48,6 +48,7 @@ class CheckDataFactory
             'printReceipt'     => $printReceipt,
             'responseURL'      => $responseUrl,
             'email'            => $order->getCustomerContact(),
+            'taxMode'          => $order->getTaxMode(),
         ];
 
         if ($cashier) {
