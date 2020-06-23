@@ -70,4 +70,11 @@ interface ModulposOrderInterface
      * @return string
      */
     public function getCheckoutDateTime();
+
+    /**
+     * Применяемая система налогообложения.
+     *
+     * @return string
+     */
+    public function getTaxMode();
 }

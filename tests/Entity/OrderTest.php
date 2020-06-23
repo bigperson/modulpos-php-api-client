@@ -16,6 +16,7 @@ use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
 use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
 use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\TaxModeNotAllowed;
 use Tests\TestCase;
 
 /**
@@ -40,6 +41,7 @@ class OrderTest extends TestCase
         $this->typeOperation = 'SALE';
         date_default_timezone_set('Europe/Moscow');
         $this->checkoutDateTime = new \DateTime('NOW');
+        $this->taxMode = 'COMMON';
 
         parent::setUp();
     }
@@ -52,12 +54,14 @@ class OrderTest extends TestCase
         $order->setCustomerContact($this->customerContact);
         $order->setTypeOperation($this->typeOperation);
         $order->setCheckoutDateTime($this->checkoutDateTime->format(DATE_RFC3339));
+        $order->setTaxMode($this->taxMode);
 
         $this->assertEquals($order->getDocumentUuid(), $this->uuid);
         $this->assertEquals($order->getOrderId(), $this->orderId);
         $this->assertEquals($order->getCustomerContact(), $this->customerContact);
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
+        $this->assertEquals($order->getTaxMode(), $this->taxMode);
     }
 
     public function testOrderCanBeCreatedByArray(): void
@@ -68,6 +72,7 @@ class OrderTest extends TestCase
             'customerContact'  => $this->customerContact,
             'typeOperation'    => $this->typeOperation,
             'checkoutDateTime' => $this->checkoutDateTime->format(DATE_RFC3339),
+            'taxMode'          => $this->taxMode,
         ]);
 
         $this->assertEquals($order->getDocumentUuid(), $this->uuid);
@@ -75,6 +80,7 @@ class OrderTest extends TestCase
         $this->assertEquals($order->getCustomerContact(), $this->customerContact);
         $this->assertEquals($order->getTypeOperation(), $this->typeOperation);
         $this->assertEquals($order->getCheckoutDateTime(), $this->checkoutDateTime->format(DATE_RFC3339));
+        $this->assertEquals($order->getTaxMode(), $this->taxMode);
     }
 
     public function testOrderCanNotBeCreatedByArray(): void
@@ -99,6 +105,16 @@ class OrderTest extends TestCase
             $order->setTypeOperation('NONE');
         } catch (\Exception $exception) {
             $this->assertTrue($exception instanceof TypeOperationsNotAllowed);
+        }
+    }
+
+    public function testOrderCanNotSetTaxMode(): void
+    {
+        try {
+            $order = new Order();
+            $order->setTaxMode('NONE');
+        } catch (\Exception $exception) {
+            $this->assertTrue($exception instanceof TaxModeNotAllowed);
         }
     }
 
