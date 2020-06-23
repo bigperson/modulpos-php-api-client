@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Bigperson\ModulposApiClient\Entity;
 
 use Bigperson\ModulposApiClient\Contracts\ModulposOrderInterface;
-use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Bigperson\ModulposApiClient\Exceptions\TaxModeNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 
 /**
  * Class Order.

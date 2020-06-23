@@ -15,8 +15,8 @@ use Bigperson\ModulposApiClient\Entity\Order;
 use Bigperson\ModulposApiClient\Entity\OrderItem;
 use Bigperson\ModulposApiClient\Entity\PaymentItem;
 use Bigperson\ModulposApiClient\Exceptions\MethodNotFound;
-use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Bigperson\ModulposApiClient\Exceptions\TaxModeNotAllowed;
+use Bigperson\ModulposApiClient\Exceptions\TypeOperationsNotAllowed;
 use Tests\TestCase;
 
 /**
