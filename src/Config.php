@@ -19,7 +19,7 @@ class Config
     /**
      * Базовый URL сервиса.
      */
-    const BASE_URI = 'https://service.modulpos.ru/api/fn';
+    const BASE_URI = 'https://my.modulkassa.ru/api/fn';
 
     /**
      * Базовый URL сервиса для тестирования.
