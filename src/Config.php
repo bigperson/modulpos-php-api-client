@@ -24,7 +24,7 @@ class Config
     /**
      * Базовый URL сервиса для тестирования.
      */
-    const BASE_TEST_URI = 'https://demo-fn.avanpos.com/fn';
+    const BASE_TEST_URI = 'https://demo.modulpos.ru/api/fn';
 
     /**
      * Возвращает базовый URL.
