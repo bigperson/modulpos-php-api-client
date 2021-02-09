@@ -121,7 +121,11 @@ class Client implements ClientInterface
     {
         $authParams = ['auth' => [$this->login, $this->password], 'json' => $data];
         $response = $this->client->request($method, $url, $authParams);
+        $stream = $response->getBody();
+        if ($stream->isSeekable()) {
+            $stream->seek(0);
+        }
 
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($stream->getContents(), true);
     }
 }
